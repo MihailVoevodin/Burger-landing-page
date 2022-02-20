@@ -1,5 +1,14 @@
+@import "normalize"
+    
 html 
     box-sizing: border-box
+
+
+*,
+*::before,
+*::after 
+    box-sizing: inherit
+
 
 
 body
@@ -12,7 +21,6 @@ body
 ul
     list-style: none
     padding-inline-start: 0
-    margin: 0
 
 a
     color: inherit
@@ -25,16 +33,20 @@ a
     padding: 0 15px
 
 .header
-    background-image: url('../images/header-bg.jpg')
+    background-image: url('../img/header-bg.jpg')
     background-position: center
     background-size: cover
     background-repeat: no-repeat
     padding-bottom: 242px
     &-top
-        display: flex
-        justify-content: space-between
-        align-items: center
-        margin-bottom: 186px
+        z-index: 10
+        position: fixed
+        width: 100%
+        &__wrapper
+            display: flex
+            justify-content: space-between
+            align-items: center
+
 
 .menu-list
     display: flex
@@ -48,6 +60,48 @@ a
     &__item:hover
         opacity: 1
 
+.hamburger 
+    display: none
+    cursor: pointer
+    span 
+        display: block
+        margin: 6px
+        width: 35px
+        height: 3px
+        background-color: #fff
+
+.active span
+    transition: all .2s
+    &:nth-child(1)
+        transform: rotate(45deg) translateX(-10px) translateY(15px)
+    &:nth-child(3)
+        transform: rotate(-45deg) translateX(8px) 
+    &:nth-child(2)
+        display: none
+        
+
+
+.hamburger-menu
+    display: none
+    position: fixed
+    text-transform: uppercase
+    width: 100%
+    height: 200px
+    top: 104px
+    background-color: #FFA500
+    z-index: 10
+    transition: all .6s
+    &__list
+        margin-left: 20px
+    li
+        padding-bottom: 15px
+    &__close
+        position: absolute
+        right: 25px
+        top: 25px
+        cursor: pointer
+
+
 .btn
     padding: 15px 37px
     text-transform: uppercase
@@ -58,6 +112,7 @@ a
     cursor: pointer
 
 .header-content
+    padding-top: 300px
     &__subtitle
         font-size: 14px
         line-height: 16px
@@ -74,34 +129,42 @@ a
         max-width: 523px
         font-size: 18px
         line-height: 21px
-        opacity: 0.7
+        opacity: 0.9
         margin-bottom: 42px
 
 .dishes
     background: #1C1C1C
     padding: 100px 0
     &-wrapper
-        display: flex
-        justify-content: space-between
+        display: grid
+        grid-template-columns: repeat(auto-fit, minmax(262px, 1fr))
+        grid-auto-rows: minmax(300px, auto)
+        justify-items: center
+        gap: 20px
     &-item
-        width: 262px
-        height: 323px
+        max-width: 262px
         background-color: #312F30
         border-radius: 10px
         text-align: center
         &__title
-            padding: 28px 0 13px 0
+            padding: 28px 0 0
             font-weight: 500
             font-size: 20px
             line-height: 23px
         &__text
+            padding: 13px 19px
             opacity: 0.7
-            padding: 0 19px
 
 .order
     background: #312F30
     &-wrapper
         display: flex
+    &-img
+        max-width: 550px
+        max-height: 500px
+        img
+            width: 100%
+            height: 100%
     &-content
         margin-left: 158px
         &__title
@@ -128,40 +191,43 @@ a
                 padding-left: 6px
                 text-decoration: line-through
                 opacity: 0.5
-        &__btn
-            margin-bottom: 165px
 
 .cards
     background: #1C1C1C
     &-wrapper
-        padding-top: 150px
-        display: flex
-        justify-content: space-between
-        flex-wrap: wrap
+        padding: 120px 0
+        display: grid
+        grid-template-columns: repeat(auto-fit, minmax(525px, 1fr))
+        grid-template-rows: repeat(2, 250px)
+        grid-auto-rows: minmax(250px, auto)
+        justify-items: center
+        gap: 20px
     &-item
-        width: 555px
-        margin-bottom: 30px
+        max-width: 525px
+        background-repeat: no-repeat
+        background-size: cover
         &__1
-            background-image: url('../images/Dairy.png')
+            background-image: url('../img/Dairy.png')
         &__2
-            background-image: url('../images/PizzaHut.png')
+            background-image: url('../img/PizzaHut.png')
         &__3
-            background-image: url('../images/Burger.png')
+            background-image: url('../img/Burger.png')
         &__4
-            background-image: url('../images/PapaJohns.png')
+            background-image: url('../img/PapaJohns.png')
         &__content
-            padding-left: 290px
-            &-right
-                padding-left: 50px
+            padding-right: 30px
+            padding-left: 270px
+            &_right
+                padding-left: 30px
+                padding-right: 270px
         &__title
             font-size: 30px
             line-height: 35px
             font-weight: 500
-            padding-top: 60px
+            padding-top: 50px
             padding-bottom: 20px
         &__text
-            opacity: 0.7
-            width: 235px
+            max-width: 235px
         &__price
             display: flex
             color: #F6762C
@@ -179,7 +245,6 @@ a
             font-size: 12px
             line-height: 14px
             font-weight: 500
-            margin-bottom: 60px
 
 
 .reviews
@@ -190,19 +255,18 @@ a
         justify-content: center
     &-photos
         position: relative
-        padding-left: 97px
         width: 346px
+        height: 300px
         &__circles
             position: absolute
             left: 45px
             top: -51px
         &__item-active
-            box-shadow: 0px 4px 25px 40px rgba(246, 118, 44, 0.5)
+            box-shadow: 0px 0px 25px 40px rgba(246, 118, 44, 0.5)
             border-radius: 50%
         &__item
             cursor: pointer
         &__main
-            align-items: center
             border-radius: 50%
             position: absolute
             top: 65px
@@ -213,15 +277,16 @@ a
         padding-left: 100px
         min-height: 310px 
     &-item
+        margin: 0 auto
         text-align: center
         max-width: 368px
-        padding-top: 170px
+        padding-top: 120px
         &__text
             opacity: 0.7
             padding-bottom: 27px
             position: relative
             &::before
-                content: url('../images/icon.svg')
+                content: url('../img/icon.svg')
                 position: absolute
                 left: 163px
                 top: -85px
@@ -268,31 +333,43 @@ a
         display: flex
         justify-content: space-around
         padding: 125px 0
+    &-inner
+        display: flex
+        justify-content: space-around
+    &-item
+        padding: 0 10px
     &-contacts
         padding-top: 25px
         font-size: 12px
         line-height: 14px
         opacity: 0.8
         &__email
-            padding-bottom: 10px
-            padding-left: 22px
-            position: relative
-            &::before
-                content: url('../images/email.svg')
-                width: 12px
-                height: 10px
-                position: absolute
-                left: 0
+            a
+                max-width: 160px
+                display: block
+                padding-bottom: 10px
+                padding-left: 22px
+                position: relative
+                &::before
+                    content: url('../img/email.svg')
+                    width: 12px
+                    height: 10px
+                    position: absolute
+                    left: 0
         &__site
-            padding-left: 22px
-            position: relative
-            &::before
-                content: url('../images/site.svg')
-                width: 12px
-                height: 12px
-                position: absolute
-                left: 0
-                transform: translateY(10%)
+            a
+                max-width: 160px
+                display: block
+                padding-left: 22px
+                position: relative
+                &::before
+                    content: url('../img/site.svg')
+                    width: 12px
+                    height: 12px
+                    position: absolute
+                    left: 0
+                    top: 50%
+                    transform: translateY(-50%)
     &-title
         font-weight: 500
     &-list li
@@ -306,7 +383,7 @@ a
             padding-left: 10px    
 
 
-
+@import "media"
 
 
 
