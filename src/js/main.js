@@ -44,6 +44,20 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    const menuItems = document.querySelectorAll('.hamburger-menu__item');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            menuContent.style.display = 'none';
+            menuTrigger.classList.remove('active');
+            if (window.pageYOffset < 150) {
+                headerChange.style.backgroundColor = 'transparent'; 
+            } else {
+                 headerChange.style.backgroundColor = '#FFA500';
+            }
+        })
+    })
+
 
     //Tabs
     const tabs = document.querySelectorAll('.reviews-photos__item'),
